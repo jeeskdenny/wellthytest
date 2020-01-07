@@ -28,7 +28,6 @@ exports.createOrder = async (req, res, next) => {
             const addvalues = ['UNASSIGNED', value]
             pool.query(text, addvalues, (err, results) => {
                 if (err) {
-                    console.log(err)
                     res.status(200).json({
                         error: err.message
                     });
@@ -40,13 +39,11 @@ exports.createOrder = async (req, res, next) => {
                 }
             })
         }).catch(error => {
-            console.log(error);
             res.status(200).json({
                 error: error
             });
         })
     } catch (err) {
-        console.log(err);
         res.status(200).json({
             error: err
         });
@@ -64,6 +61,7 @@ exports.createOrder = async (req, res, next) => {
 */
 
 exports.takeOrder = async (req, res, next) => {
+    //here we can also enable the queue mechanism. 
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         var singleError = errors.array()[0];
@@ -93,6 +91,8 @@ exports.takeOrder = async (req, res, next) => {
                     } else {
                         throw new Error("you can take the order only once")
                     }
+                } else {
+                    throw new Error("No data with given id")
                 }
             } catch (e) {
                 await client.query('ROLLBACK')
@@ -107,7 +107,6 @@ exports.takeOrder = async (req, res, next) => {
         })
     }
 }
-
 
 /**
 * Gert list of Orders action.
