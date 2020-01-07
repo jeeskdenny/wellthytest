@@ -1,10 +1,16 @@
 {
   "name": "wealthytest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Welthy Test",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeeskdenny/wellthytest.git"
+  },
   "scripts": {
-    "test": "mocha \"tests/**/*Tests.js\" || true"
+    "test": "mocha \"tests/**/*Tests.js\" || true",
+    "dev": "nodemon --inspect=0.0.0.0:8080 index.js",
+    "start": "node index.js"
   },
   "author": " <jees.jees5@gmail.com>",
   "license": "ISC",

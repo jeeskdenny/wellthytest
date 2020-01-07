@@ -28,7 +28,10 @@ exports.createOrder = async (req, res, next) => {
             const addvalues = ['UNASSIGNED', value]
             pool.query(text, addvalues, (err, results) => {
                 if (err) {
-                    throw err;
+                    console.log(err)
+                    res.status(200).json({
+                        error: err.message
+                    });
                 } else {
                     if (results.rows && results.rows.length > 0) {
                         delete results.rows[0].timestamp;
@@ -37,6 +40,7 @@ exports.createOrder = async (req, res, next) => {
                 }
             })
         }).catch(error => {
+            console.log(error);
             res.status(200).json({
                 error: error
             });

@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgres://jeeskdenny:jeeskdenny123@postgres:5432/wellthy  
+      DATABASE_USER: jeeskdenny
+      DATABASE_PASSWORD: jeeskdenny123
+      DATABASE_DB: wellthy
+  postgres:
+    image: postgres:12.1-alpine
+    environment:
+      POSTGRES_USER: jeeskdenny
+      POSTGRES_PASSWORD: jeeskdenny123
+      POSTGRES_DB: wellthy
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+volumes:
+  db-data:
