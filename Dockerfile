@@ -8,8 +8,6 @@ COPY package.json /var/app/
 COPY package-lock.json /var/app/
 COPY start.sh /var/app/
 
-COPY init.sql /docker-entrypoint-initdb.d/
-
 RUN npm install
 
 COPY . /var/app

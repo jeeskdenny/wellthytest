@@ -14,7 +14,9 @@ services:
       DATABASE_PASSWORD: jeeskdenny123
       DATABASE_DB: wellthy
   postgres:
-    image: postgres:12.1-alpine
+    build:
+      context: .
+      dockerfile: postgresDockerfile
     environment:
       POSTGRES_USER: jeeskdenny
       POSTGRES_PASSWORD: jeeskdenny123
